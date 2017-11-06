@@ -1,0 +1,31 @@
+import { NgModule, ModuleWithProviders } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+
+import { InputComponent } from './input/input.component'
+import { RadioComponent } from './radio/radio.component'
+import { RatingComponent } from './rating/rating.component'
+
+import { OrderService } from '../order/order.service'
+import { RestaurantService } from '../restaurants/restaurant.service'
+import { ShoppingCartService } from '../restaurants/restaurant-detail/shopping-cart/shopping-cart.service';
+import { NotificationService } from '../shared/messages/notification.service';
+import { LoginService } from '../security/login/login.service'
+import { LoggedInGuard } from '../security/loggedin.guard'
+
+import { SnackbarComponent } from './messages/snackbar/snackbar.component'
+
+@NgModule({
+    declarations: [ InputComponent, RadioComponent, RatingComponent, SnackbarComponent ],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule ],
+    exports:[ InputComponent, RadioComponent, RatingComponent, CommonModule, FormsModule, ReactiveFormsModule, SnackbarComponent ]
+    
+})
+export class SharedModule{
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: SharedModule,
+            providers: [ShoppingCartService, RestaurantService, OrderService, NotificationService, LoginService, LoggedInGuard ]
+        }
+    }
+}
